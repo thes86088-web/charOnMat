@@ -140,6 +140,9 @@ public class Main
 	    int width = (2*size) + 1 ;
 	    int canvas[][] = new int[height][width] ;
 	    
+	    StandingSeg st1 = new StandingSeg( canvas, height, 1, 2 ) ;
+	    st1.turnON() ;
+	    
 	    printMat(canvas, height, width) ;
 		
 	}
