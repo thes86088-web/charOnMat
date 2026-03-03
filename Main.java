@@ -156,75 +156,53 @@ class Premade
     
     
     Seg[] segForZero = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st1, st3, st4,       
+        sl0, sl2, sl4,
     };
     
     Seg[] segForOne = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st1, st4
     };
     
     Seg[] segForTwo = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st1, st3,       
+        sl0, sl2, sl4,
     };
     
     Seg[] segForThree = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st1, st4,       
+        sl0, sl2, sl4,
     };
     
     Seg[] segForFour = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st1, st4,       
+        sl2,
     };
     
     Seg[] segForFive = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st4,       
+        sl0, sl2, sl4,
     };
     
     Seg[] segForSix = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3, st4,       
+        sl0, sl2, sl4,
     };
     
     Seg[] segForSeven = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st1, st4,       
+        sl0,
     };
     
     Seg[] segForEight = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st1, st3, st4,       
+        sl0, sl2, sl4,
     };
     
     Seg[] segForNine = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st1, st4,       
+        sl0, sl2, sl4,
     };
-    
     
     Seg[] segForA = {
         st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
