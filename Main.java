@@ -1,4 +1,9 @@
 
+enum convention { 
+    STANDING = 0, SLEEPING = 7,
+    DIAGONAL = 14, SLANTING = 20
+} ;
+
 class Canvas
 {
     int size = 0 ;
@@ -9,7 +14,7 @@ class Canvas
     {
         this.size = cell_gap ;
         this.height = ( 3*cell_gap ) ;
-	    this.width = ( 2*cell_gap ) + 1 ;
+	    this.width = ( 2*cell_gap ) ;
 	    this.canvas = new int[this.height][this.width] ;
     }
     
@@ -85,6 +90,7 @@ class Premade
     int tri = 0; int tri_fold = 0;
     int max_x = 0; int max_y = 0;
     Seg[][] result ;
+    Seg[] components;
     
     Premade( Canvas t )
     {
@@ -143,6 +149,15 @@ class Premade
         Seg sn5 = new SlantingSeg( this.target, size, this.tri_fold, this.max_y) ;
         
         Seg dot = new StandingSeg( this.target, 1, mid, 0 );
+       
+       Seg[] tempComponents = {
+        st0, st1, st2, st3, st4, st5, st6, st7,
+        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
+        d0, d1, d2, d3, d4, d5,
+        sn0, sn1, sn2, sn3, sn4, sn5   
+       }
+       
+       this.components = tempComponents ;
         
         Seg[] segForZero = {
             st0, st1, st3, st4,       
@@ -523,6 +538,8 @@ abstract class Seg
     }
     
     abstract void turnON() ;
+    
+    abstract void turnOFF() ;
     //abstract comes before void
 }
 
@@ -551,6 +568,22 @@ class StandingSeg extends Seg
             k = k + 1 ;
         }
     }
+    
+    
+    @Override
+    void turnOFF()
+    {
+        int k = 0;
+        while( k<this.len && (this.x_start + k < this.parent.height)  )
+        {
+            //(this.parent)[k][this.column] = 1;
+            //(this.parent)[this.x_start + k][this.column] = 1;
+            
+            (this.parent.canvas)[this.x_start + k][this.column] = 0;
+            
+            k = k + 1 ;
+        }
+    }
 }
 
 class SleepingSeg extends Seg
@@ -574,6 +607,22 @@ class SleepingSeg extends Seg
             //(this.parent)[this.row][ this.y_start + k] = 1;
             
             (this.parent.canvas)[this.row][ this.y_start + k] = 1;
+            
+            k = k + 1 ;
+        }
+    }
+    
+    
+    @Override
+    void turnOFF()
+    {
+        int k = 0;
+        while( k<this.len && (this.y_start + k < this.parent.width) )
+        {
+            //(this.parent)[this.row][k] = 1;
+            //(this.parent)[this.row][ this.y_start + k] = 1;
+            
+            (this.parent.canvas)[this.row][ this.y_start + k] = 0;
             
             k = k + 1 ;
         }
@@ -607,6 +656,21 @@ class DiagonalSeg extends Seg
             k = k + 1 ;
         }
     }
+    
+    @Override
+    void turnOFF()
+    {
+        int k = 0;
+        while( 
+            k<this.len 
+            && (this.x_start + k < this.parent.height) 
+            && (this.y_start + k < this.parent.width)
+            )
+        {
+            (this.parent.canvas)[this.x_start + k][this.y_start + k] = 0;
+            k = k + 1 ;
+        }
+    }
 }
 
 class SlantingSeg extends Seg
@@ -635,6 +699,22 @@ class SlantingSeg extends Seg
             k = k + 1 ;
         }
     }
+    
+    @Override
+    void turnOFF()
+    {
+        int k = 0;
+        while( 
+            k<this.len 
+            && (this.x_start + k < this.parent.height) 
+            && (this.y_start - k >= 0)   
+            )
+        {
+            //refers to upper point out of the two
+            (this.parent.canvas)[this.x_start + k][this.y_start - k] = 0;
+            k = k + 1 ;
+        }
+    }
 }
 
 public class Main
@@ -645,13 +725,18 @@ public class Main
 	    
 	    Canvas canvas = new Canvas( size ) ;
 	    
-	    char[] supportedCharSet =  {
+	    Premade template = new Premade( canvas ) ;
+	    
+	    template.components[]
+	    
+	    /*char[] supportedCharSet =  {
 	        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
             'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
             'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 	    };
+	    */
 	    
 	    for( char given : supportedCharSet )
 	    {
