@@ -68,7 +68,7 @@ class StandingSeg extends Seg
     void turnON()
     {
         int k = 0;
-        while( k<this.len )
+        while( k<this.len && (this.x_start + k < this.parent.height)  )
         {
             //(this.parent)[k][this.column] = 1;
             //(this.parent)[this.x_start + k][this.column] = 1;
@@ -95,7 +95,7 @@ class SleepingSeg extends Seg
     void turnON()
     {
         int k = 0;
-        while( k<this.len )
+        while( k<this.len && (this.y_start + k < this.parent.width) )
         {
             //(this.parent)[this.row][k] = 1;
             //(this.parent)[this.row][ this.y_start + k] = 1;
@@ -122,7 +122,11 @@ class DiagonalSeg extends Seg
     void turnON()
     {
         int k = 0;
-        while( k<this.len )
+        while( 
+            k<this.len 
+            && (this.x_start + k < this.parent.height) 
+            && (this.y_start + k < this.parent.width)
+            )
         {
             //(this.parent)[this.x_start + k][this.y_start + k] = 1;
             
@@ -147,8 +151,13 @@ class SlantingSeg extends Seg
     void turnON()
     {
         int k = 0;
-        while( k<this.len )
+        while( 
+            k<this.len 
+            && (this.x_start + k < this.parent.height) 
+            && (this.y_start - k >= 0)   
+            )
         {
+            //refers to upper point out of the two
             (this.parent.canvas)[this.x_start + k][this.y_start - k] = 1;
             k = k + 1 ;
         }
