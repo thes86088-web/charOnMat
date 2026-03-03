@@ -15,6 +15,44 @@ abstract class Seg
     //abstract comes before void
 }
 
+class Canvas
+{
+    int height = 0;
+    int width = 0;
+    int[][] canvas ;
+    
+    Canvas( int cell_gap )
+    {
+        this.height = (3*size) + 1;
+	    this.width = (2*size) + 1 ;
+	    this.canvas = new int[this.height][this.width] ;
+    }
+    
+    //adding printMat as method eliminates the need for parameters
+    void printMat( )
+    {
+        int i = 0; int j = 0;
+        while(i<this.height)
+        {
+            j = 0;
+            while(j<this.width)
+            {
+                System.out.print( mat[i][j] + " ")  ;
+                j = j + 1;
+                
+                if(j==width)
+                {
+                    System.out.println() ;
+                }
+            }
+            i = i + 1 ;
+        }
+        
+    }
+    
+    
+}
+
 class StandingSeg extends Seg
 {
     int column = 0;   int x_start = 0;
@@ -113,32 +151,12 @@ class SlantingSeg extends Seg
 
 public class Main
 {
-    static void printMat( int mat[][], int height, int width )
-    {
-        int i = 0; int j = 0;
-        while(i<height)
-        {
-            j = 0;
-            while(j<width)
-            {
-                System.out.print( mat[i][j] + " ")  ;
-                j = j + 1;
-                
-                if(j==width)
-                {
-                    System.out.println() ;
-                }
-            }
-            i = i + 1 ;
-        }
-        
-    }
-    
+    //move the printMat method to Canvas class
 	public static void main(String[] args) {
 	    int size = 3 ; //some integer>2
-	    int height = (3*size) + 1;
-	    int width = (2*size) + 1 ;
-	    int canvas[][] = new int[height][width] ;
+	    
+	    StandingSeg st1 = new StandingSeg( canvas, height, 1, 2 ) ;
+	    st1.turnON() ;
 	    
 	    printMat(canvas, height, width) ;
 		
