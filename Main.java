@@ -8,8 +8,8 @@ class Canvas
     Canvas( int cell_gap )
     {
         this.size = cell_gap ;
-        this.height = ( 3*cell_gap ) ;
-	    this.width = ( 2*cell_gap ) ;
+        this.height = ( 3*cell_gap ) + 1;
+	    this.width = ( 2*cell_gap ) + 1 ;
 	    this.canvas = new int[this.height][this.width] ;
     }
     
@@ -23,6 +23,27 @@ class Canvas
             while(j<this.width)
             {
                 System.out.print( ( this.canvas[i][j] == 1 ? "*" : " " ) + " ")  ;
+                j = j + 1;
+                
+                if(j==width)
+                {
+                    System.out.println() ;
+                }
+            }
+            i = i + 1 ;
+        }
+        
+    }
+    
+    void verifyCanvas( )
+    {
+        int i = 0; int j = 0;
+        while(i<this.height)
+        {
+            j = 0;
+            while(j<this.width)
+            {
+                System.out.print( ( this.canvas[i][j]  ) + " ")  ;
                 j = j + 1;
                 
                 if(j==width)
@@ -161,50 +182,51 @@ class Premade
         Seg st7 = new StandingSeg( this.target, size, this.max_y, this.tri ) ;
         Seg st8 = new StandingSeg( this.target, size, this.max_y, this.tri_fold ) ;
         
-        Seg sl0 = new SleepingSeg( this.target, size, 0, 0 ) ;
-        Seg sl1 = new SleepingSeg( this.target, size, 0, this.mid ) ;
+        Seg sl0 = new SleepingSeg( this.target, size+1, 0, 0 ) ;
+        Seg sl1 = new SleepingSeg( this.target, size+1, 0, this.mid ) ;
         
-        Seg sl2 = new SleepingSeg( this.target, size, this.tri, 0 ) ;
-        Seg sl3 = new SleepingSeg( this.target, size, this.tri, this.mid ) ;
+        Seg sl2 = new SleepingSeg( this.target, size+1, this.tri, 0 ) ;
+        Seg sl3 = new SleepingSeg( this.target, size+1, this.tri, this.mid ) ;
         
-        Seg sl4 = new SleepingSeg( this.target, size, this.tri_fold, 0 ) ;
-        Seg sl5 = new SleepingSeg( this.target, size, this.tri_fold, this.mid ) ;
+        Seg sl4 = new SleepingSeg( this.target, size+1, this.tri_fold, 0 ) ;
+        Seg sl5 = new SleepingSeg( this.target, size+1, this.tri_fold, this.mid ) ;
         
-        Seg sl6 = new SleepingSeg( this.target, size, this.max_x, 0 ) ;
-        Seg sl7 = new SleepingSeg( this.target, size, this.max_x, this.mid ) ;
+        Seg sl6 = new SleepingSeg( this.target, size+1, this.max_x, 0 ) ;
+        Seg sl7 = new SleepingSeg( this.target, size+1, this.max_x, this.mid ) ;
         
-        Seg d0 = new DiagonalSeg( this.target, size, 0, 0 ) ;
-        Seg d1 = new DiagonalSeg( this.target, size, 0 , this.mid ) ;
+        Seg d0 = new DiagonalSeg( this.target, size+1, 0, 0 ) ;
+        Seg d1 = new DiagonalSeg( this.target, size+1, 0 , this.mid ) ;
         
-        Seg d2 = new DiagonalSeg( this.target, size, this.tri , 0 ) ;
-        Seg d3 = new DiagonalSeg( this.target, size, this.tri , this.mid ) ;
+        Seg d2 = new DiagonalSeg( this.target, size+1, this.tri , 0 ) ;
+        Seg d3 = new DiagonalSeg( this.target, size+1, this.tri , this.mid ) ;
         
-        Seg d4 = new DiagonalSeg( this.target, size, this.tri_fold , 0 ) ;
-        Seg d5 = new DiagonalSeg( this.target, size, this.tri_fold , this.mid ) ;
+        Seg d4 = new DiagonalSeg( this.target, size+1, this.tri_fold , 0 ) ;
+        Seg d5 = new DiagonalSeg( this.target, size+1, this.tri_fold , this.mid ) ;
         
-        Seg sn0 = new SlantingSeg( this.target, size, 0, this.mid ) ;
-        Seg sn1 = new SlantingSeg( this.target, size, 0, this.max_y ) ;
+        Seg sn0 = new SlantingSeg( this.target, size+1, 0, this.mid ) ;
+        Seg sn1 = new SlantingSeg( this.target, size+1, 0, this.max_y ) ;
         
-        Seg sn2 = new SlantingSeg( this.target, size, this.tri, this.mid ) ;
-        Seg sn3 = new SlantingSeg( this.target, size, this.tri, this.max_y ) ;
+        Seg sn2 = new SlantingSeg( this.target, size+1, this.tri, this.mid ) ;
+        Seg sn3 = new SlantingSeg( this.target, size+1, this.tri, this.max_y ) ;
         
-        Seg sn4 = new SlantingSeg( this.target, size, this.tri_fold, this.mid ) ;
-        Seg sn5 = new SlantingSeg( this.target, size, this.tri_fold, this.max_y) ;
+        Seg sn4 = new SlantingSeg( this.target, size+1, this.tri_fold, this.mid ) ;
+        Seg sn5 = new SlantingSeg( this.target, size+1, this.tri_fold, this.max_y ) ;
         
         Seg dot = new StandingSeg( this.target, 1, mid, 0 );
        
        Seg[] tempComponents = {
-        st0, st1, st2, st3, st4, st5, st6, st7,
+        st0, st1, st2, st3, st4, st5, st6, st7, st8,
         sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
         d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5   
+        sn0, sn1, sn2, sn3, sn4, sn5,
+        dot
        } ;
        
        this.components = tempComponents ;
         
         Seg[] segForZero = {
             st0, st1, st3, st4,       
-            sl0, sl2, sl4,
+            sl0, sl4,
         };
         
         Seg[] segForOne = {
@@ -769,54 +791,59 @@ public class Main
 	    Canvas canvas = new Canvas( size ) ;
 	    
 	    Premade template = new Premade( canvas ) ;
+	    template.createTemplates() ;
+	    //forgot to create the components before calling them
 	    
-	    Seg[] comps = template.components;
+	    /*Seg[] comps = template.components;
 	    // System.out.println( comps ); --> null
+	    //System.out.println( comps ); 
+	    */
 	    
-	    
-	    /*char[] supportedCharSet =  {
-	        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+	    char[] supportedCharSet =  {
+	        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'/*,
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
             'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-            'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+            'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'*/
 	    };
-	    */
+	    
 	     
-	    /*for( char given : supportedCharSet )
+	    for( char given : supportedCharSet )
 	    {
 	        canvas.drawChar( given ) ;
 	    
 	        canvas.printCanvas() ;
+	        canvas.resetCanvas() ;
 	        System.out.println(); System.out.println();
-	    }*/
+	    }
 	    
-	    int count = 0; 
-	    /*while( count < 30 )
+	    /*int count = 0; 
+	    while( count < 30 )
 	    {   
 	        if( count < 9 )
 	        {   System.out.println( "standing " + count );
 	        }
 	        else if( count < 17 )
-	        {   System.out.println( "sleeping " + (17 - count)  );
+	        {   System.out.println( "sleeping " + ( count - 9 )  );
 	        }
 	        else if( count < 23 )
-	        {   System.out.println( "diagonal" + (23-count) );
+	        {   System.out.println( "diagonal" + ( count - 17 ) );
 	        }
 	        else if( count < 29 )
-	        {   System.out.println( "slanting" + (29 - count) );
+	        {   System.out.println( "slanting" + ( count - 23 ) );
 	        }
 	        else {
-	            System.out.println( "dot" + count );
+	            System.out.println( "dot" );
 	        }
 	        System.out.println();
 	        
 	        comps[count].turnON() ;
-	        canvas.printCanvas() ;
+	        canvas.verifyCanvas() ;
 	        comps[count].turnOFF() ;
 	        canvas.resetCanvas() ;
 	        System.out.println(); System.out.println();
 	        count = count + 1 ;
-	    }*/
+	    }
+	    */
 	}
 }
