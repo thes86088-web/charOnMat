@@ -34,7 +34,43 @@ class Canvas
         
     }
     
-    
+    void drawChar( char given )
+    {
+        int intValue = (int)( given ) ; int index = 0;
+        
+        /*array of arrays that store required segments*/
+        Seg[][] segments = {
+            
+            /*first 10 arrays for 0-9*/
+            /*then 26 arrays for A-Z */
+            /*finally 26 arrays for a-z*/ 
+        }; 
+        
+        if( intValue>=(int)('0') && intValue<=(int)('9') )
+        {
+            index = intValue - (int)('0') ;
+            
+        }
+        else if( intValue>=(int)('A') && intValue<=(int)('Z') )
+        {
+            index = intValue - (int)('A') ;
+            
+        }
+        else if( intValue>=(int)('a') && intValue<=(int)('z') )
+        {
+            index = intValue - (int)('a') ;
+            
+        }
+        else
+        {
+            System.out.println("invalid character !") ;    
+        }
+        
+        for( Seg segment : segments[index] )
+        {
+            segment.turnON() ;
+        }
+    }
 }
 
 abstract class Seg
@@ -167,13 +203,20 @@ class SlantingSeg extends Seg
 public class Main
 {
     //move the printMat method to Canvas class
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 	    int size = 3 ; //some integer>2
 	    
-	    StandingSeg st1 = new StandingSeg( canvas, height, 1, 2 ) ;
-	    st1.turnON() ;
+	    Canvas canvas = new Canvas( size ) ;
 	    
-	    printMat(canvas, height, width) ;
+	    /*StandingSeg st1 = new StandingSeg( canvas, 10, 1, 2 ) ;
+	    st1.turnON() ;
+	    */
+	    
+	    char given = 'A' ;
+	    canvas.drawChar( given ) ;
+	    
+	    //canvas.printMat() ;
 		
 	}
 }
