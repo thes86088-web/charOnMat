@@ -69,7 +69,7 @@ class DiagonalSeg extends Seg
 {
     int x_start = 0;   int y_start = 0;
     
-    SleepingSeg( int p[][], int l, int x_s, int y_s )
+    DiagonalSeg( int p[][], int l, int x_s, int y_s )
     {
         super( p, l ) ;
         this.x_start = x_s ;
@@ -82,7 +82,30 @@ class DiagonalSeg extends Seg
         int k = 0;
         while( k<this.len )
         {
-            (this.parent)[this.row + k][this.column + k] = 1;
+            (this.parent)[this.x_start + k][this.y_start + k] = 1;
+            k = k + 1 ;
+        }
+    }
+}
+
+class SlantingSeg extends Seg
+{
+    int x_start = 0;   int y_start = 0;
+    
+    SlantingSeg( int p[][], int l, int x_s, int y_s )
+    {
+        super( p, l ) ;
+        this.x_start = x_s ;
+        this.y_start = y_s ;
+    }
+    
+    @Override
+    void turnON()
+    {
+        int k = 0;
+        while( k<this.len )
+        {
+            (this.parent)[this.x_start + k][this.y_start - k] = 1;
             k = k + 1 ;
         }
     }
