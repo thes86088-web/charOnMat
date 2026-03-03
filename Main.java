@@ -113,6 +113,30 @@ class SlantingSeg extends Seg
 
 public class Main
 {
+    void printMat( int mat[][], int height, int width )
+    {
+        int i = 0; int j = 0;
+        while(i<height)
+        {
+            j = 0;
+            while(j<width)
+            {
+                if(j==0)
+                {
+                    System.out.println(mat[i][j]);
+                }
+                
+                else{
+                    System.out.print(mat[i][j])  ;
+                }
+                
+                j = j + 1;
+            };
+            i = i + 1 ;
+        }
+        
+    }
+    
 	public static void main(String[] args) {
 	    int size = 3 ; //some integer>2
 	    int height = (3*size) + 1;
