@@ -1,20 +1,4 @@
 
-abstract class Seg
-{
-    int parent[][] ;
-    int len = 0;
-    
-    Seg( int p[][], int l )
-    {
-        //shorten the parameter names
-        this.parent = p ;
-        this.len = l ;
-    }
-    
-    abstract void turnON() ;
-    //abstract comes before void
-}
-
 class Canvas
 {
     int height = 0;
@@ -23,8 +7,8 @@ class Canvas
     
     Canvas( int cell_gap )
     {
-        this.height = (3*size) + 1;
-	    this.width = (2*size) + 1 ;
+        this.height = ( 3*cell_gap ) + 1;
+	    this.width = ( 2*cell_gap ) + 1 ;
 	    this.canvas = new int[this.height][this.width] ;
     }
     
@@ -37,7 +21,7 @@ class Canvas
             j = 0;
             while(j<this.width)
             {
-                System.out.print( mat[i][j] + " ")  ;
+                System.out.print( this.canvas[i][j] + " ")  ;
                 j = j + 1;
                 
                 if(j==width)
@@ -53,11 +37,27 @@ class Canvas
     
 }
 
+abstract class Seg
+{
+    Canvas parent ;
+    int len = 0;
+    
+    Seg( Canvas p, int l )
+    {
+        //shorten the parameter names
+        this.parent = p ;
+        this.len = l ;
+    }
+    
+    abstract void turnON() ;
+    //abstract comes before void
+}
+
 class StandingSeg extends Seg
 {
     int column = 0;   int x_start = 0;
     
-    StandingSeg( int p[][], int l, int col , int x_s )
+    StandingSeg( Canvas p, int l, int col , int x_s )
     {
         super( p, l ) ;
         this.column = col;
@@ -71,7 +71,9 @@ class StandingSeg extends Seg
         while( k<this.len )
         {
             //(this.parent)[k][this.column] = 1;
-            (this.parent)[this.x_start + k][this.column] = 1;
+            //(this.parent)[this.x_start + k][this.column] = 1;
+            
+            (this.parent.canvas)[this.x_start + k][this.column] = 1;
             
             k = k + 1 ;
         }
@@ -82,7 +84,7 @@ class SleepingSeg extends Seg
 {
     int row = 0;   int y_start = 0;
     
-    SleepingSeg( int p[][], int l, int r , int y_s )
+    SleepingSeg( Canvas p, int l, int r , int y_s )
     {
         super( p, l ) ;
         this.row = r;
@@ -96,7 +98,9 @@ class SleepingSeg extends Seg
         while( k<this.len )
         {
             //(this.parent)[this.row][k] = 1;
-            (this.parent)[this.row][ this.y_start + k] = 1;
+            //(this.parent)[this.row][ this.y_start + k] = 1;
+            
+            (this.parent.canvas)[this.row][ this.y_start + k] = 1;
             
             k = k + 1 ;
         }
@@ -107,7 +111,7 @@ class DiagonalSeg extends Seg
 {
     int x_start = 0;   int y_start = 0;
     
-    DiagonalSeg( int p[][], int l, int x_s, int y_s )
+    DiagonalSeg( Canvas p, int l, int x_s, int y_s )
     {
         super( p, l ) ;
         this.x_start = x_s ;
@@ -120,7 +124,9 @@ class DiagonalSeg extends Seg
         int k = 0;
         while( k<this.len )
         {
-            (this.parent)[this.x_start + k][this.y_start + k] = 1;
+            //(this.parent)[this.x_start + k][this.y_start + k] = 1;
+            
+            (this.parent.canvas)[this.x_start + k][this.y_start + k] = 1;
             k = k + 1 ;
         }
     }
@@ -130,7 +136,7 @@ class SlantingSeg extends Seg
 {
     int x_start = 0;   int y_start = 0;
     
-    SlantingSeg( int p[][], int l, int x_s, int y_s )
+    SlantingSeg( Canvas p, int l, int x_s, int y_s )
     {
         super( p, l ) ;
         this.x_start = x_s ;
@@ -143,7 +149,7 @@ class SlantingSeg extends Seg
         int k = 0;
         while( k<this.len )
         {
-            (this.parent)[this.x_start + k][this.y_start - k] = 1;
+            (this.parent.canvas)[this.x_start + k][this.y_start - k] = 1;
             k = k + 1 ;
         }
     }
