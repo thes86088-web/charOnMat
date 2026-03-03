@@ -20,14 +20,11 @@ class StandingSeg extends Seg
     
     StandingSeg( int parent[][], int len, int column , int x_start )
     {
-        //Seg( parent, len ) ;
         super( parent, len ) ;
-        //first call in child constructor must be for parent constructor
         this.column = column;
         this.x_start = x_start;
     }
     
-    //add override decorator to ensure polymmorphism success
     @Override
     void turnON()
     {
@@ -39,6 +36,31 @@ class StandingSeg extends Seg
         }
     }
 }
+
+
+class SleepingSeg extends Seg
+{
+    int row = 0;   int y_start = 0;
+    
+    SleepingSeg( int parent[][], int len, int row , int y_start )
+    {
+        super( parent, len ) ;
+        this.row = row;
+        this.y_start = y_start;
+    }
+    
+    @Override
+    void turnON()
+    {
+        int k = 0;
+        while( k<this.len )
+        {
+            (this.parent)[this.row][k] = 1;
+            k = k + 1 ;
+        }
+    }
+}
+
 
 public class Main
 {
