@@ -1,19 +1,20 @@
 
 class Canvas
 {
-    int height = 0;
-    int width = 0;
+    int size = 0 ;
+    int height = 0; int width = 0;
     int[][] canvas ;
     
     Canvas( int cell_gap )
     {
+        this.size = cell_gap ;
         this.height = ( 3*cell_gap ) ;
 	    this.width = ( 2*cell_gap ) + 1 ;
 	    this.canvas = new int[this.height][this.width] ;
     }
     
     //adding printMat as method eliminates the need for parameters
-    void printMat( )
+    void printCanvas( )
     {
         int i = 0; int j = 0;
         while(i<this.height)
@@ -21,7 +22,7 @@ class Canvas
             j = 0;
             while(j<this.width)
             {
-                System.out.print( this.canvas[i][j] + " ")  ;
+                System.out.print( ( this.canvas[i][j] == 1 ? "*" : " " ) + " ")  ;
                 j = j + 1;
                 
                 if(j==width)
@@ -39,35 +40,10 @@ class Canvas
         int intValue = (int)( given ) ; int index = 0;
         
         Premade template = new Premade( this ) ;
-        
+       
+        template.createTemplates() ;
+        Seg[][] segments = template.result ; 
         /*array of arrays that store required segments*/
-        Seg[][] segments = {
-            template.segForZero, template.segForOne, template.segForTwo, 
-            template.segForThree, template.segForFour, template.segForFive,
-            template.segForSix, template.segForSeven, template.segForEight, 
-            template.segForNine,
-            
-            template.segForA, template.segForB, template.segForC, template.segForD,
-            template.segForE, template.segForF, template.segForG, template.segForH,
-            template.segForI, template.segForJ, template.segForK, template.segForL,
-            template.segForM, template.segForN, template.segForO, template.segForP, 
-            template.segForQ, template.segForR, template.segForS, template.segForT,
-            template.segForU, template.segForV, template.segForW, template.segForX,
-            template.segForY, template.segForZ,
-            
-            template.segForLowerA, template.segForLowerB, template.segForLowerC,
-            template.segForLowerD, template.segForLowerE, template.segForLowerF,
-            template.segForLowerG, template.segForLowerH, template.segForLowerI, 
-            template.segForLowerJ, template.segForLowerK, template.segForLowerL,
-            template.segForLowerM, template.segForLowerN, template.segForLowerO, 
-            template.segForLowerP, template.segForLowerQ, template.segForLowerR, 
-            template.segForLowerS, template.segForLowerT, template.segForLowerU, 
-            template.segForLowerV, template.segForLowerW, template.segForLowerX,
-            template.segForLowerY, template.segForLowerZ
-            /*first 10 arrays for 0-9*/
-            /*then 26 arrays for A-Z */
-            /*finally 26 arrays for a-z*/ 
-        }; 
         
         if( intValue>=(int)('0') && intValue<=(int)('9') )
         {
@@ -107,7 +83,8 @@ class Premade
     Canvas target;
     int mid = 0;
     int tri = 0; int tri_fold = 0;
-    int max_h = 0; int max_w = 0;
+    int max_x = 0; int max_y = 0;
+    Seg[][] result ;
     
     Premade( Canvas t )
     {
@@ -119,387 +96,418 @@ class Premade
         this.max_x = this.target.height - 1 ;
     }
     
-    Seg st0 = new StandingSeg( this.target, size, 0, 0 ) ;
-    Seg st1 = new StandingSeg( this.target, size, 0, this.tri ) ;
-    Seg st2 = new StandingSeg( this.target, size, 0, this.tri_fold ) ;
+    void createTemplates()
+    {
+        int size = this.target.size ;
+        
+        Seg st0 = new StandingSeg( this.target, size, 0, 0 ) ;
+        Seg st1 = new StandingSeg( this.target, size, 0, this.tri ) ;
+        Seg st2 = new StandingSeg( this.target, size, 0, this.tri_fold ) ;
+        
+        Seg st3 = new StandingSeg( this.target, size, this.mid, 0 ) ;
+        Seg st4 = new StandingSeg( this.target, size, this.mid, this.tri ) ;
+        Seg st5 = new StandingSeg( this.target, size, this.mid, this.tri_fold ) ;
+        
+        Seg st6 = new StandingSeg( this.target, size, this.max_y, 0 ) ;
+        Seg st7 = new StandingSeg( this.target, size, this.max_y, this.tri ) ;
+        Seg st8 = new StandingSeg( this.target, size, this.max_y, this.tri_fold ) ;
+        
+        Seg sl0 = new SleepingSeg( this.target, size, 0, 0 ) ;
+        Seg sl1 = new SleepingSeg( this.target, size, 0, this.mid ) ;
+        
+        Seg sl2 = new SleepingSeg( this.target, size, this.tri, 0 ) ;
+        Seg sl3 = new SleepingSeg( this.target, size, this.tri, this.mid ) ;
+        
+        Seg sl4 = new SleepingSeg( this.target, size, this.tri_fold, 0 ) ;
+        Seg sl5 = new SleepingSeg( this.target, size, this.tri_fold, this.mid ) ;
+        
+        Seg sl6 = new SleepingSeg( this.target, size, this.max_x, 0 ) ;
+        Seg sl7 = new SleepingSeg( this.target, size, this.max_x, this.mid ) ;
+        
+        Seg d0 = new DiagonalSeg( this.target, size, 0, 0 ) ;
+        Seg d1 = new DiagonalSeg( this.target, size, 0 , this.mid ) ;
+        
+        Seg d2 = new DiagonalSeg( this.target, size, this.tri , 0 ) ;
+        Seg d3 = new DiagonalSeg( this.target, size, this.tri , this.mid ) ;
+        
+        Seg d4 = new DiagonalSeg( this.target, size, this.tri_fold , 0 ) ;
+        Seg d5 = new DiagonalSeg( this.target, size, this.tri_fold , this.mid ) ;
+        
+        Seg sn0 = new SlantingSeg( this.target, size, 0, this.mid ) ;
+        Seg sn1 = new SlantingSeg( this.target, size, 0, this.max_y ) ;
+        
+        Seg sn2 = new SlantingSeg( this.target, size, this.tri, this.mid ) ;
+        Seg sn3 = new SlantingSeg( this.target, size, this.tri, this.max_y ) ;
+        
+        Seg sn4 = new SlantingSeg( this.target, size, this.tri_fold, this.mid ) ;
+        Seg sn5 = new SlantingSeg( this.target, size, this.tri_fold, this.max_y) ;
+        
+        Seg dot = new StandingSeg( this.target, 1, mid, 0 );
+        
+        Seg[] segForZero = {
+            st0, st1, st3, st4,       
+            sl0, sl2, sl4,
+        };
+        
+        Seg[] segForOne = {
+            st1, st4
+        };
+        
+        Seg[] segForTwo = {
+            st1, st3,       
+            sl0, sl2, sl4,
+        };
+        
+        Seg[] segForThree = {
+            st1, st4,       
+            sl0, sl2, sl4,
+        };
+        
+        Seg[] segForFour = {
+            st0, st1, st4,       
+            sl2,
+        };
+        
+        Seg[] segForFive = {
+            st0, st4,       
+            sl0, sl2, sl4,
+        };
+        
+        Seg[] segForSix = {
+            st0, st3, st4,       
+            sl0, sl2, sl4,
+        };
+        
+        Seg[] segForSeven = {
+            st1, st4,       
+            sl0,
+        };
+        
+        Seg[] segForEight = {
+            st0, st1, st3, st4,       
+            sl0, sl2, sl4,
+        };
+        
+        Seg[] segForNine = {
+            st0, st1, st4,       
+            sl0, sl2, sl4,
+        };
+        
+        Seg[] segForA = {
+            st0, st2, st3, st5,       
+            sl0, sl1, sl2, sl3,
+        };
+        
+        Seg[] segForLowerA = {
+            st3, st4,       
+            sl2, sl4, sl5
+        };
+        
+        Seg[] segForB = {
+            st0, st3,       
+            sl0, sl1, sl2, sl4, sl5,
+            d3,
+            sn1,
+        };
+        
+        Seg[] segForLowerB = {
+            st0, st3, st4,       
+            sl2, sl4,
+        };
+        
+        Seg[] segForC = {
+            st0, st3,       
+            sl0, sl1, sl4, sl5,
+        };
+        
+        Seg[] segForLowerC = {
+            st3,       
+            sl2, sl4,
+        };
+        
+        Seg[] segForD = {
+            st1, st2, st4, st5,       
+            sl0, sl1, sl4, sl5,
+        };
+        
+        Seg[] segForLowerD = {
+            st2, st4, st5,       
+            sl3, sl5,
+        };
+        
+        Seg[] segForE = {
+            st0, st3,       
+            sl0, sl1, sl2, sl3, sl4, sl5
+        };
+        /*
+        Seg[] segForLowerE = {
+            st0, st1, st3,       
+            sl0, sl2, sl4,
+        };
+        */
+        Seg[] segForLowerE = {
+            st3,       
+            sl2, sl4,
+            sn2
+        };
+        
+        Seg[] segForF = {
+            st0, st3,       
+            sl0, sl1, sl2, sl3
+        };
+        
+        Seg[] segForLowerF = {
+            st0, st3,       
+            sl0, sl2
+        };
+        
+        Seg[] segForG = {
+            st0, st3,        
+            sl0, sl1, sl4, sl5,
+            d3
+        };
+        
+        Seg[] segForLowerG = {
+            st4, st5, st8,       
+            sl3, sl5, sl7,
+            sn5
+        };
+        
+        Seg[] segForH = {
+            st0, st2, st3, st5,       
+            sl2, sl3
+        };
+        
+        Seg[] segForLowerH = {
+            st0, st3, st4,       
+            sl2
+        };
+        
+        Seg[] segForI = {
+            st1, st4,      
+            sl0, sl1, sl4, sl5
+        };
+        
+        Seg[] segForLowerI = {
+            st4, 
+            dot
+        };
+        
+        Seg[] segForJ = {
+            st1, st4,       
+            sl0, sl1, sl4
+        };
+        
+        Seg[] segForLowerJ = {
+            st4, st7,       
+            sl6, 
+            sn4,
+            dot
+        };
+        
+        Seg[] segForK = {
+            st0, st3,       
+            sl2,
+            d3,
+            sn1
+        };
+        
+        Seg[] segForLowerK = {
+            st0, st3,      
+            sl2,
+            d2
+        };
+        
+        Seg[] segForL = {
+            st0, st3,      
+            sl4, sl5,
+        };
+        
+        /* Seg[] segForLowerL = {
+            st0, st3,     
+            sl4
+        };
+        */
+        
+        Seg[] segForLowerL = {
+            st0, d2
+        };
+        
+        
+        Seg[] segForM = {
+            st0, st2, st3, st5,
+            d0,
+            sn1
+        };
+        
+        Seg[] segForLowerM = {
+            st3, st4, st5,      
+            sl2, sl3
+        };
+        
+        Seg[] segForN = {
+            st0, st2, st3, st5,   
+            d0, d3
+        };
+        
+        Seg[] segForLowerN = {
+            st3, st4,       
+            sl2 
+        };
+        
+        Seg[] segForO = {
+            st0, st2, st3, st5,       
+            sl0, sl1, sl4, sl5,
+        };
+        
+        Seg[] segForLowerO = {
+            st3, st4,    
+            sl2, sl4,
+        };
+        
+        Seg[] segForP = {
+            st0, st2, st3,       
+            sl0, sl1, sl2, sl3
+        };
+        
+        Seg[] segForLowerP = {
+            st3, st4, st6,      
+            sl2, sl4
+        };
+        
+        Seg[] segForQ = {
+            st0, st1, st3, st4,    
+            sl0, sl2, sl4,
+            d3,
+            sn2
+        };
+        
+        Seg[] segForLowerQ = {
+            st3, st4, st7,      
+            sl2, sl4,
+            sn5
+        };
+        
+        Seg[] segForR = {
+            st0, st2, st3,      
+            sl0, sl1, sl2, sl3, 
+            d3 
+        };
+        
+        Seg[] segForLowerR = {
+            st4,    
+            sn3,
+        };
+        
+        Seg[] segForS = {
+            st0, st5,   
+            sl0, sl1, sl2, sl3, sl4, sl5,
+        };
+        
+        Seg[] segForLowerS = {
+            sl2, sl4,
+            d2
+        };
+        
+        Seg[] segForT = {
+            st1, st4,      
+            sl0, sl1
+        };
+        
+        Seg[] segForLowerT = {
+            st1, st4,      
+            sl2, sl3, sl5,
+        };
+        
+        Seg[] segForU = {
+            st0, st2, st3, st5,      
+            sl4, sl5
+        };
+        
+        Seg[] segForLowerU = {
+            st3, st4,  
+            sl4, sl5
+        };
+        
+        Seg[] segForV = {
+            st0, st2,      
+            d2, 
+            sn3
+        };
+        
+        Seg[] segForLowerV = {
+            d2, 
+            sn3
+        };
+        
+        Seg[] segForW = {
+            st0, st1, st2, st3, st4, st5,       
+            sl4, sl5
+        };
+        
+        Seg[] segForLowerW = {
+            st3, st4, st5,      
+            sl4, sl5
+        };
+        
+        Seg[] segForX = {
+            d0, d3,
+            sn1, sn2
+        };
+        
+        Seg[] segForLowerX = {
+            d2, 
+            sn2
+        };
+        
+        Seg[] segForY = {
+            st4,   
+            d0,
+            sn1
+        };
+        
+        Seg[] segForLowerY = {
+            st4, st5, st8,       
+            sl5, sl7,
+            sn5
+        };
+        
+        Seg[] segForZ = {
+            sl0, sl1, sl4, sl5,
+            sn1, sn2
+        };
+        
+        Seg[] segForLowerZ = {
+            sl3, sl5, 
+            sn3
+        };
+        
+        Seg[][] temp = {
+            segForZero, segForOne, segForTwo, segForThree, segForFour, 
+            segForFive, segForSix, segForSeven, segForEight, segForNine,
+            
+            segForA, segForB, segForC, segForD, segForE, segForF,
+            segForG, segForH, segForI, segForJ, segForK, segForL,
+            segForM, segForN, segForO, segForP, segForQ, segForR,
+            segForS, segForT, segForU, segForV, segForW, segForX,
+            segForY, segForZ,
+
+            segForLowerA, segForLowerB, segForLowerC, segForLowerD, 
+            segForLowerE, segForLowerF, segForLowerG, segForLowerH, 
+            segForLowerI, segForLowerJ, segForLowerK, segForLowerL,
+            segForLowerM, segForLowerN, segForLowerO, segForLowerP, 
+            segForLowerQ, segForLowerR, segForLowerS, segForLowerT, 
+            segForLowerU, segForLowerV, segForLowerW, segForLowerX,
+            segForLowerY, segForLowerZ
+            /*first 10 arrays for 0-9*/
+            /*then 26 arrays for A-Z */
+            /*finally 26 arrays for a-z*/ 
+        } ;
+        
+        this.result = temp ;
+    }
     
-    Seg st3 = new StandingSeg( this.target, size, this.mid, 0 ) ;
-    Seg st4 = new StandingSeg( this.target, size, this.mid, this.tri ) ;
-    Seg st5 = new StandingSeg( this.target, size, this.mid, this.tri_fold ) ;
     
-    Seg st6 = new StandingSeg( this.target, size, this.max_y, 0 ) ;
-    Seg st7 = new StandingSeg( this.target, size, this.max_y, this.tri ) ;
-    Seg st8 = new StandingSeg( this.target, size, this.max_y, this.tri_fold ) ;
-    
-    Seg sl0 = new SleepingSeg( this.target, size, 0, 0 ) ;
-    Seg sl1 = new SleepingSeg( this.target, size, 0, this.mid ) ;
-    
-    Seg sl2 = new SleepingSeg( this.target, size, this.tri, 0 ) ;
-    Seg sl3 = new SleepingSeg( this.target, size, this.tri, this.mid ) ;
-    
-    Seg sl4 = new SleepingSeg( this.target, size, this.tri_fold, 0 ) ;
-    Seg sl5 = new SleepingSeg( this.target, size, this.tri_fold, this.mid ) ;
-    
-    Seg sl6 = new SleepingSeg( this.target, size, this.max_x, 0 ) ;
-    Seg sl7 = new SleepingSeg( this.target, size, this.max_x, this.mid ) ;
-    
-    Seg d0 = new DiagonalSeg( this.target, size, 0, 0 ) ;
-    Seg d1 = new DiagonalSeg( this.target, size, 0 , this.mid ) ;
-    
-    Seg d2 = new DiagonalSeg( this.target, size, this.tri , 0 ) ;
-    Seg d3 = new DiagonalSeg( this.target, size, this.tri , this.mid ) ;
-    
-    Seg d4 = new DiagonalSeg( this.target, size, this.tri_fold , 0 ) ;
-    Seg d5 = new DiagonalSeg( this.target, size, this.tri_fold , this.mid ) ;
-    
-    Seg sn0 = new SlantingSeg( this.target, size, 0, this.mid ) ;
-    Seg sn1 = new SlantingSeg( this.target, size, 0, this.max_y ) ;
-    
-    Seg sn2 = new SlantingSeg( this.target, size, this.tri, this.mid ) ;
-    Seg sn3 = new SlantingSeg( this.target, size, this.tri, this.max_y ) ;
-    
-    Seg sn4 = new SlantingSeg( this.target, size, this.tri_fold, this.mid ) ;
-    Seg sn5 = new SlantingSeg( this.target, size, this.tri_fold, this.max_y) ;
-    
-    Seg dot = new StandingSeg( this.target, 1, mid, 0 );
-    
-    Seg[] segForZero = {
-        st0, st1, st3, st4,       
-        sl0, sl2, sl4,
-    };
-    
-    Seg[] segForOne = {
-        st1, st4
-    };
-    
-    Seg[] segForTwo = {
-        st1, st3,       
-        sl0, sl2, sl4,
-    };
-    
-    Seg[] segForThree = {
-        st1, st4,       
-        sl0, sl2, sl4,
-    };
-    
-    Seg[] segForFour = {
-        st0, st1, st4,       
-        sl2,
-    };
-    
-    Seg[] segForFive = {
-        st0, st4,       
-        sl0, sl2, sl4,
-    };
-    
-    Seg[] segForSix = {
-        st0, st3, st4,       
-        sl0, sl2, sl4,
-    };
-    
-    Seg[] segForSeven = {
-        st1, st4,       
-        sl0,
-    };
-    
-    Seg[] segForEight = {
-        st0, st1, st3, st4,       
-        sl0, sl2, sl4,
-    };
-    
-    Seg[] segForNine = {
-        st0, st1, st4,       
-        sl0, sl2, sl4,
-    };
-    
-    Seg[] segForA = {
-        st0, st2, st3, st5,       
-        sl0, sl1, sl2, sl3,
-    };
-    
-    Seg[] segForLowerA = {
-        st3, st4,       
-        sl2, sl4, sl5
-    };
-    
-    Seg[] segForB = {
-        st0, st3,       
-        sl0, sl1, sl2, sl4, sl5,
-        d3,
-        sn1,
-    };
-    
-    Seg[] segForLowerB = {
-        st0, st3, st4,       
-        sl2, sl4,
-    };
-    
-    Seg[] segForC = {
-        st0, st3,       
-        sl0, sl1, sl4, sl5,
-    };
-    
-    Seg[] segForLowerC = {
-        st3,       
-        sl2, sl4,
-    };
-    
-    Seg[] segForD = {
-        st1, st2, st4, st5,       
-        sl0, sl1, sl4, sl5,
-    };
-    
-    Seg[] segForLowerD = {
-        st2, st4, st5,       
-        sl3, sl5,
-    };
-    
-    Seg[] segForE = {
-        st0, st3,       
-        sl0, sl1, sl2, sl3, sl4, sl5
-    };
-    /*
-    Seg[] segForLowerE = {
-        st0, st1, st3,       
-        sl0, sl2, sl4,
-    };
-    */
-    Seg[] segForLowerE = {
-        st3,       
-        sl2, sl4,
-        sn2
-    };
-    
-    Seg[] segForF = {
-        st0, st3,       
-        sl0, sl1, sl2, sl3
-    };
-    
-    Seg[] segForLowerF = {
-        st0, st3,       
-        sl0, sl2
-    };
-    
-    Seg[] segForG = {
-        st0, st3,        
-        sl0, sl1, sl4, sl5,
-        d3
-    };
-    
-    Seg[] segForLowerG = {
-        st4, st5, st8,       
-        sl3, sl5, sl7,
-        sn5
-    };
-    
-    Seg[] segForH = {
-        st0, st2, st3, st5,       
-        sl2, sl3
-    };
-    
-    Seg[] segForLowerH = {
-        st0, st3, st4,       
-        sl2
-    };
-    
-    Seg[] segForI = {
-        st1, st4,      
-        sl0, sl1, sl4, sl5
-    };
-    
-    Seg[] segForLowerI = {
-        st4, 
-        dot
-    };
-    
-    Seg[] segForJ = {
-        st1, st4,       
-        sl0, sl1, sl4
-    };
-    
-    Seg[] segForLowerJ = {
-        st4, st7,       
-        sl6, 
-        sn4,
-        dot
-    };
-    
-    Seg[] segForK = {
-        st0, st3,       
-        sl2,
-        d3,
-        sn1
-    };
-    
-    Seg[] segForLowerK = {
-        st0, st3,      
-        sl2,
-        d2
-    };
-    
-    Seg[] segForL = {
-        st0, st3,      
-        sl4, sl5,
-    };
-    
-    /* Seg[] segForLowerL = {
-        st0, st3,     
-        sl4
-    };
-    */
-    
-    Seg[] segForLowerL = {
-        st0, d2
-    };
-    
-    
-    Seg[] segForM = {
-        st0, st2, st3, st5,
-        d0,
-        sn1
-    };
-    
-    Seg[] segForLowerM = {
-        st3, st4, st5,      
-        sl2, sl3
-    };
-    
-    Seg[] segForN = {
-        st0, st2, st3, st5,   
-        d0, d3
-    };
-    
-    Seg[] segForLowerN = {
-        st3, st4,       
-        sl2 
-    };
-    
-    Seg[] segForO = {
-        st0, st2, st3, st5,       
-        sl0, sl1, sl4, sl5,
-    };
-    
-    Seg[] segForLowerO = {
-        st3, st4,    
-        sl2, sl4,
-    };
-    
-    Seg[] segForP = {
-        st0, st2, st3,       
-        sl0, sl1, sl2, sl3
-    };
-    
-    Seg[] segForLowerP = {
-        st3, st4, st6,      
-        sl2, sl4
-    };
-    
-    Seg[] segForQ = {
-        st0, st1, st3, st4,    
-        sl0, sl2, sl4,
-        d3,
-        sn2
-    };
-    
-    Seg[] segForLowerQ = {
-        st3, st4, st7,      
-        sl2, sl4,
-        sn5
-    };
-    
-    Seg[] segForR = {
-        st0, st2, st3,      
-        sl0, sl1, sl2, sl3, 
-        d3 
-    };
-    
-    Seg[] segForLowerR = {
-        st4,    
-        sn3,
-    };
-    
-    Seg[] segForS = {
-        st0, st5,   
-        sl0, sl1, sl2, sl3, sl4, sl5,
-    };
-    
-    Seg[] segForLowerS = {
-        sl2, sl4,
-        d2
-    };
-    
-    Seg[] segForT = {
-        st1, st4      
-        sl0, sl1
-    };
-    
-    Seg[] segForLowerT = {
-        st1, st4,      
-        sl2, sl3, sl5,
-    };
-    
-    Seg[] segForU = {
-        st0, st2, st3, st5,      
-        sl4, sl5
-    };
-    
-    Seg[] segForLowerU = {
-        st3, st4,  
-        sl4, sl5
-    };
-    
-    Seg[] segForV = {
-        st0, st2,      
-        d2, 
-        sn3
-    };
-    
-    Seg[] segForLowerV = {
-        d2, 
-        sn3
-    };
-    
-    Seg[] segForW = {
-        st0, st1, st2, st3, st4, st5,       
-        sl4, sl5
-    };
-    
-    Seg[] segForLowerW = {
-        st3, st4, st5,      
-        sl4, sl5
-    };
-    
-    Seg[] segForX = {
-        d0, d3,
-        sn1, sn2
-    };
-    
-    Seg[] segForLowerX = {
-        d2, 
-        sn2
-    };
-    
-    Seg[] segForY = {
-        st4,   
-        d0,
-        sn1
-    };
-    
-    Seg[] segForLowerY = {
-        st4, st5, st8,       
-        sl5, sl7,
-        sn5
-    };
-    
-    Seg[] segForZ = {
-        sl0, sl1, sl4, sl5,
-        sn1, sn2
-    };
-    
-    Seg[] segForLowerZ = {
-        sl3, sl5, 
-        sn3
-    };
 }
 
 abstract class Seg
@@ -631,21 +639,15 @@ class SlantingSeg extends Seg
 
 public class Main
 {
-    //move the printMat method to Canvas class
 	public static void main(String[] args) 
 	{
-	    static int size = 3 ; //some integer>2
+	    int size = 3 ; //some integer>2
 	    
 	    Canvas canvas = new Canvas( size ) ;
-	    
-	    /*StandingSeg st1 = new StandingSeg( canvas, 10, 1, 2 ) ;
-	    st1.turnON() ;
-	    */
 	    
 	    char given = 'A' ;
 	    canvas.drawChar( given ) ;
 	    
-	    //canvas.printMat() ;
-		
+	    canvas.printCanvas() ;
 	}
 }
