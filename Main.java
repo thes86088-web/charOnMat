@@ -1,9 +1,4 @@
 
-enum convention { 
-    STANDING = 0, SLEEPING = 7,
-    DIAGONAL = 14, SLANTING = 20
-} ;
-
 class Canvas
 {
     int size = 0 ;
@@ -38,6 +33,54 @@ class Canvas
             i = i + 1 ;
         }
         
+    }
+    
+    void resetCanvas( )
+    {
+        int i = 0; int j = 0;
+        while(i<this.height)
+        {
+            j = 0;
+            while(j<this.width)
+            {
+                this.canvas[i][j] = 0  ;
+                j = j + 1;
+                
+            }
+            i = i + 1 ;
+        }
+    }
+    
+    void setCanvas( )
+    {
+        int i = 0; int j = 0;
+        while(i<this.height)
+        {
+            j = 0;
+            while(j<this.width)
+            {
+                this.canvas[i][j] = 1  ;
+                j = j + 1;
+                
+            }
+            i = i + 1 ;
+        }
+    }
+    
+    void toggleCanvas( )
+    {
+        int i = 0; int j = 0;
+        while(i<this.height)
+        {
+            j = 0;
+            while(j<this.width)
+            {
+                this.canvas[i][j] = ( this.canvas[i][j] == 1 ? 0 : 1 )  ;
+                j = j + 1;
+                
+            }
+            i = i + 1 ;
+        }
     }
     
     void drawChar( char given )
@@ -155,7 +198,7 @@ class Premade
         sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
         d0, d1, d2, d3, d4, d5,
         sn0, sn1, sn2, sn3, sn4, sn5   
-       }
+       } ;
        
        this.components = tempComponents ;
         
@@ -727,7 +770,9 @@ public class Main
 	    
 	    Premade template = new Premade( canvas ) ;
 	    
-	    template.components[]
+	    Seg[] comps = template.components;
+	    // System.out.println( comps ); --> null
+	    
 	    
 	    /*char[] supportedCharSet =  {
 	        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -737,13 +782,41 @@ public class Main
             'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 	    };
 	    */
-	    
-	    for( char given : supportedCharSet )
+	     
+	    /*for( char given : supportedCharSet )
 	    {
 	        canvas.drawChar( given ) ;
 	    
 	        canvas.printCanvas() ;
 	        System.out.println(); System.out.println();
-	    }
+	    }*/
+	    
+	    int count = 0; 
+	    /*while( count < 30 )
+	    {   
+	        if( count < 9 )
+	        {   System.out.println( "standing " + count );
+	        }
+	        else if( count < 17 )
+	        {   System.out.println( "sleeping " + (17 - count)  );
+	        }
+	        else if( count < 23 )
+	        {   System.out.println( "diagonal" + (23-count) );
+	        }
+	        else if( count < 29 )
+	        {   System.out.println( "slanting" + (29 - count) );
+	        }
+	        else {
+	            System.out.println( "dot" + count );
+	        }
+	        System.out.println();
+	        
+	        comps[count].turnON() ;
+	        canvas.printCanvas() ;
+	        comps[count].turnOFF() ;
+	        canvas.resetCanvas() ;
+	        System.out.println(); System.out.println();
+	        count = count + 1 ;
+	    }*/
 	}
 }
