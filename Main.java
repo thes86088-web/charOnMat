@@ -42,22 +42,28 @@ class Canvas
         
         /*array of arrays that store required segments*/
         Seg[][] segments = {
-            segForZero, segForOne, segForTwo, segForThree, segForFour, 
-            segForFive, segForSix, segForSeven, segForEight, segForNine,
+            template.segForZero, template.segForOne, template.segForTwo, 
+            template.segForThree, template.segForFour, template.segForFive,
+            template.segForSix, template.segForSeven, template.segForEight, 
+            template.segForNine,
             
-            segForA, segForB, segForC, segForD, segForE, segForF,
-            segForG, segForH, segForI, segForJ, segForK, segForL,
-            segForM, segForN, segForO, segForP, segForQ, segForR,
-            segForS, segForT, segForU, segForV, segForW, segForX,
-            segForY, segForZ,
+            template.segForA, template.segForB, template.segForC, template.segForD,
+            template.segForE, template.segForF, template.segForG, template.segForH,
+            template.segForI, template.segForJ, template.segForK, template.segForL,
+            template.segForM, template.segForN, template.segForO, template.segForP, 
+            template.segForQ, template.segForR, template.segForS, template.segForT,
+            template.segForU, template.segForV, template.segForW, template.segForX,
+            template.segForY, template.segForZ,
             
-            segForLowerA, segForLowerB, segForLowerC, segForLowerD, 
-            segForLowerE, segForLowerF, segForLowerG, segForLowerH, 
-            segForLowerI, segForLowerJ, segForLowerK, segForLowerL,
-            segForLowerM, segForLowerN, segForLowerO, segForLowerP, 
-            segForLowerQ, segForLowerR, segForLowerS, segForLowerT, 
-            segForLowerU, segForLowerV, segForLowerW, segForLowerX,
-            segForLowerY, segForLowerZ
+            template.segForLowerA, template.segForLowerB, template.segForLowerC,
+            template.segForLowerD, template.segForLowerE, template.segForLowerF,
+            template.segForLowerG, template.segForLowerH, template.segForLowerI, 
+            template.segForLowerJ, template.segForLowerK, template.segForLowerL,
+            template.segForLowerM, template.segForLowerN, template.segForLowerO, 
+            template.segForLowerP, template.segForLowerQ, template.segForLowerR, 
+            template.segForLowerS, template.segForLowerT, template.segForLowerU, 
+            template.segForLowerV, template.segForLowerW, template.segForLowerX,
+            template.segForLowerY, template.segForLowerZ
             /*first 10 arrays for 0-9*/
             /*then 26 arrays for A-Z */
             /*finally 26 arrays for a-z*/ 
@@ -88,7 +94,8 @@ class Canvas
             System.out.println("invalid character !") ;    
         }
         
-        for( Seg segment : segments[index] )
+        Seg[] requiredSeg = segments[index] ; 
+        for( Seg segment : requiredSeg )
         {
             segment.turnON() ;
         }
