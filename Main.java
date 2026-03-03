@@ -14,6 +14,28 @@ abstract class Seg
     //abstract comes before void
 }
 
+class StandingSeg extends Seg
+{
+    int column = 0;   int x_start = 0;
+    
+    StandingSeg( int parent[][], int len, int column , int x_start )
+    {
+        Seg( parent, len ) ;
+        this.column = column;
+        this.x_start = x_start;
+    }
+    
+    void turnON()
+    {
+        int k = 0;
+        while( k<this.len )
+        {
+            (this.parent)[k][this.column] = 1;
+            k = k + 1 ;
+        }
+    }
+}
+
 public class Main
 {
 	public static void main(String[] args) {
