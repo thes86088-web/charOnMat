@@ -154,6 +154,7 @@ class Premade
     Seg sn4 = new SlantingSeg( this.target, size, this.tri_fold, this.mid ) ;
     Seg sn5 = new SlantingSeg( this.target, size, this.tri_fold, this.max_y) ;
     
+    Seg dot = new StandingSeg( this.target, 1, mid, 0 );
     
     Seg[] segForZero = {
         st0, st1, st3, st4,       
@@ -205,368 +206,292 @@ class Premade
     };
     
     Seg[] segForA = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st2, st3, st5,       
+        sl0, sl1, sl2, sl3,
     };
     
     Seg[] segForLowerA = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st3, st4,       
+        sl2, sl4, sl5
     };
     
-    
     Seg[] segForB = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3,       
+        sl0, sl1, sl2, sl4, sl5,
+        d3,
+        sn1,
     };
     
     Seg[] segForLowerB = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3, st4,       
+        sl2, sl4,
     };
     
     Seg[] segForC = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3,       
+        sl0, sl1, sl4, sl5,
     };
     
     Seg[] segForLowerC = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st3,       
+        sl2, sl4,
     };
     
     Seg[] segForD = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st1, st2, st4, st5,       
+        sl0, sl1, sl4, sl5,
     };
     
     Seg[] segForLowerD = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st2, st4, st5,       
+        sl3, sl5,
     };
     
     Seg[] segForE = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3,       
+        sl0, sl1, sl2, sl3, sl4, sl5
     };
-    
+    /*
     Seg[] segForLowerE = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st1, st3,       
+        sl0, sl2, sl4,
+    };
+    */
+    Seg[] segForLowerE = {
+        st3,       
+        sl2, sl4,
+        sn2
     };
     
     Seg[] segForF = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3,       
+        sl0, sl1, sl2, sl3
     };
     
     Seg[] segForLowerF = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3,       
+        sl0, sl2
     };
     
     Seg[] segForG = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3,        
+        sl0, sl1, sl4, sl5,
+        d3
     };
     
     Seg[] segForLowerG = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st4, st5, st8,       
+        sl3, sl5, sl7,
+        sn5
     };
     
     Seg[] segForH = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st2, st3, st5,       
+        sl2, sl3
     };
     
     Seg[] segForLowerH = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3, st4,       
+        sl2
     };
     
     Seg[] segForI = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st1, st4,      
+        sl0, sl1, sl4, sl5
     };
     
     Seg[] segForLowerI = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st4, 
+        dot
     };
     
     Seg[] segForJ = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st1, st4,       
+        sl0, sl1, sl4
     };
     
     Seg[] segForLowerJ = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st4, st7,       
+        sl6, 
+        sn4,
+        dot
     };
     
     Seg[] segForK = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3,       
+        sl2,
+        d3,
+        sn1
     };
     
     Seg[] segForLowerK = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3,      
+        sl2,
+        d2
     };
     
     Seg[] segForL = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st3,      
+        sl4, sl5,
     };
+    
+    /* Seg[] segForLowerL = {
+        st0, st3,     
+        sl4
+    };
+    */
     
     Seg[] segForLowerL = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, d2
     };
     
+    
     Seg[] segForM = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st2, st3, st5,
+        d0,
+        sn1
     };
     
     Seg[] segForLowerM = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st3, st4, st5,      
+        sl2, sl3
     };
     
     Seg[] segForN = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st2, st3, st5,   
+        d0, d3
     };
     
     Seg[] segForLowerN = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st3, st4,       
+        sl2 
     };
     
     Seg[] segForO = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st2, st3, st5,       
+        sl0, sl1, sl4, sl5,
     };
     
     Seg[] segForLowerO = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st3, st4,    
+        sl2, sl4,
     };
     
     Seg[] segForP = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st2, st3,       
+        sl0, sl1, sl2, sl3
     };
     
     Seg[] segForLowerP = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st3, st4, st6,      
+        sl2, sl4
     };
     
     Seg[] segForQ = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st1, st3, st4,    
+        sl0, sl2, sl4,
+        d3,
+        sn2
     };
     
     Seg[] segForLowerQ = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st3, st4, st7,      
+        sl2, sl4,
+        sn5
     };
     
     Seg[] segForR = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st2, st3,      
+        sl0, sl1, sl2, sl3, 
+        d3 
     };
     
     Seg[] segForLowerR = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st4,    
+        sn3,
     };
     
     Seg[] segForS = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st5,   
+        sl0, sl1, sl2, sl3, sl4, sl5,
     };
     
     Seg[] segForLowerS = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        sl2, sl4,
+        d2
     };
     
     Seg[] segForT = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st1, st4      
+        sl0, sl1
     };
     
     Seg[] segForLowerT = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st1, st4,      
+        sl2, sl3, sl5,
     };
     
     Seg[] segForU = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st2, st3, st5,      
+        sl4, sl5
     };
     
     Seg[] segForLowerU = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st3, st4,  
+        sl4, sl5
     };
     
     Seg[] segForV = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st2,      
+        d2, 
+        sn3
     };
     
     Seg[] segForLowerV = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        d2, 
+        sn3
     };
     
     Seg[] segForW = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st0, st1, st2, st3, st4, st5,       
+        sl4, sl5
     };
     
     Seg[] segForLowerW = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st3, st4, st5,      
+        sl4, sl5
     };
     
     Seg[] segForX = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        d0, d3,
+        sn1, sn2
     };
     
     Seg[] segForLowerX = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        d2, 
+        sn2
     };
     
     Seg[] segForY = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st4,   
+        d0,
+        sn1
     };
     
     Seg[] segForLowerY = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        st4, st5, st8,       
+        sl5, sl7,
+        sn5
     };
     
     Seg[] segForZ = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        sl0, sl1, sl4, sl5,
+        sn1, sn2
     };
     
     Seg[] segForLowerZ = {
-        st0, st1, st2, st3, st4, st5, st6, st7, st8, st9,       
-        sl0, sl1, sl2, sl3, sl4, sl5, sl6, sl7,
-        d0, d1, d2, d3, d4, d5,
-        sn0, sn1, sn2, sn3, sn4, sn5
+        sl3, sl5, 
+        sn3
     };
 }
 
