@@ -1,5 +1,17 @@
 
 
+class Seg
+{
+    int parent[][] ;
+    int len = 0;
+    
+    Seg( int parent[][], int len )
+    {
+        this.parent = parent ;
+        this.len = len ;
+    }
+}
+
 public class Main
 {
 	public static void main(String[] args) {
