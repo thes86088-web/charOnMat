@@ -1,6 +1,5 @@
 
-
-class Seg
+abstract class Seg
 {
     int parent[][] ;
     int len = 0;
@@ -10,6 +9,9 @@ class Seg
         this.parent = parent ;
         this.len = len ;
     }
+    
+    abstract void turnON() ;
+    //abstract comes before void
 }
 
 public class Main
